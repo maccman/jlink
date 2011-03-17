@@ -16,6 +16,7 @@ For example:
       $(this).append($("#userTmpl").tmpl(data));  
     });
 
+    // Linky has added a change() event to the object
     object.change();
     
     object.name = "Test 2";
