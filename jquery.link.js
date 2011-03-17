@@ -1,18 +1,18 @@
-// jquery.linky does two things:
+// 
+// JLink does two things:
 //  * adds a 'change' callback onto standard objects
 //  * add a utility function to bind up jQuery elements and objects
-
+// 
 // var object  = {
 //   name: "Test Name"
 // };
 //       
-// $("#user").linky(object, function(e, data){
+// $("#user").link(object, function(e, data){
 //   $(this).empty();
 //   $(this).append($("#userTmpl").tmpl(data));  
 // });
 // 
 // object.change();
-
 
 (function($){
   
@@ -32,12 +32,12 @@
       } else {
         if ( !this._change ) return;
         for (var i=0; i < this._change.length; i++)
-          this._change[i].apply(this, arguments);
+          this._change[i].apply(this, callback, callback);
       }
     };    
   };
   
-  $.fn.linky = function(object, callback){
+  $.fn.link = $.fn.jlink = function(object, callback){
     var element = $(this);
     
     if ( !object )

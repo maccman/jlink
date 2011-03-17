@@ -1,6 +1,6 @@
-#jquery.linky.js
+#JLink
 
-This library lets you bind JavaScript objects to HTML elements.
+JLink lets you bind JavaScript objects to HTML elements.
 
 For example:
 
@@ -8,7 +8,7 @@ For example:
       name: "Test Name"
     };
       
-    $("#user").linky(object, function(e, data){
+    $("#user").link(object, function(e, data){
       // This gets called when object.change() gets called
 
       // Render template...
@@ -23,7 +23,7 @@ For example:
     object.change();
     
 
-The `$.fn.linky()` function is just a utility function for tying objects and elements together.  
+The `$.fn.link()` function is just a utility function for tying objects and elements together.  
 The example above is equivalent to this:
 
     var object = {
