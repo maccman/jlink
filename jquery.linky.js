@@ -17,13 +17,14 @@
 (function($){
   
   var checkChange = function(ob){
-    if ( !ob ) return false;
     if ("change" in ob && typeof ob.change != "function")
       throw("change is already defined in " + ob);
     return( !!ob.change );
   }
   
   $.addChange = function(ob){
+    if (checkChange(ob)) return;
+    
     ob.change = function(callback){
       if (callback) {
         if ( !this._change ) this._change = [];
@@ -42,8 +43,7 @@
     if ( !object )
       throw("You must provide an object")
     
-    if ( !checkChange(object) ) 
-      $.addChange(object);
+    $.addChange(object);
     
     object.change(function(){
       element.trigger("change", this); 
