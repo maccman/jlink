@@ -46,11 +46,11 @@
     $.addChange(object);
     
     object.change(function(){
-      element.trigger("render.link", this); 
+      element.trigger("render", this); 
     });
     
     if ( callback )
-      element.bind("render.link", callback);
+      element.bind("render", callback);
     
     return element;
   };
