@@ -132,7 +132,7 @@ module("Basics");
 
 	test("Comments", function() {
 		test_handler( "comments are removed", R('A{{! comments test }}B', testData), "AB" );
-		test_handler( "comments are removed (2)", R('{{! inky }}foo{{! blinky }}', testData), 'foo' );
+		test_handler( "comments are removed (2)", R('{{! inky }}foo{{! bjlink }}', testData), 'foo' );
 		// TODO fixme
 		return;
 		test_handler( "comments may include string of comments", R('A{{! comments "}}" test }}B', testData), "AB" );

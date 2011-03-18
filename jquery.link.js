@@ -32,7 +32,7 @@
       } else {
         if ( !this._change ) return;
         for (var i=0; i < this._change.length; i++)
-          this._change[i].apply(this, callback, callback);
+          this._change[i].apply(this);
       }
     };    
   };
@@ -46,12 +46,23 @@
     $.addChange(object);
     
     object.change(function(){
-      element.trigger("change", this); 
+      element.trigger("render.link", this); 
     });
     
     if ( callback )
-      element.bind("change", callback);
+      element.bind("render.link", callback);
     
     return element;
+  };
+  
+  $.fn.render = function(callback) {
+    callback ? this.bind("render", callback) : this.trigger("render");
+  };
+  
+  $.fn.item = function(){
+    var item = $(this).tmplItem().data;
+    if (typeof item.reload == "function")
+      item = item.reload();
+    return item;
   };
 })(jQuery);

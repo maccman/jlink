@@ -8,7 +8,13 @@ Math.guid = function(){
 var Model = Klass.create();
 
 // Alias create
-Model.setup = Model.create;
+Model.createSub = Model.create;
+Model.setup = function(name, atts){
+  var model = Model.createSub();
+  if (name) model.name = name;
+  if (atts) model.attributes = atts;
+  return model;
+};
 
 Model.extend({
  init: function(){
@@ -32,7 +38,7 @@ Model.extend({
  
  populate: function(values){
    // Reset model & records
-   this.init();
+   this.records = {};
    
    for (var i=0, il = values.length; i < il; i++) {    
      var record = this.inst(values[i]);
@@ -141,9 +147,9 @@ Model.include({
   
   validate: function(){ },
 
-  load: function(attributes){
-    for(var name in attributes)
-      this[name] = attributes[name];
+  load: function(atts){
+    for(var name in atts)
+      this[name] = atts[name];
   },
 
   attributes: function(){
@@ -174,8 +180,8 @@ Model.include({
     return this.save();
   },
   
-  updateAttributes: function(attributes){
-    this.load(attributes);
+  updateAttributes: function(atts){
+    this.load(atts);
     return this.save();
   },
 
@@ -189,9 +195,13 @@ Model.include({
   dup: function(){
     return Object.create(this);
   },
+  
+  reload: function(){
+    return(this.parent.find(this.id));
+  },
 
   toJSON: function(){
-    return(JSON.stringify(this.attributes()));
+    return(this.attributes());
   },
   
   // Private
